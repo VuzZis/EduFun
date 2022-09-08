@@ -11,8 +11,3 @@ let site = Site.Instance;
 ].forEach(e => {require(e)});
 
 site.Run();
-
-setInterval(() => {
-    Logger.Log(Logger.GetLogs().length);
-}
-,1000);
