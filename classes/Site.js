@@ -1,5 +1,6 @@
 const express = require('express');
 const Logger = require('./Logger');
+const path = require('path');
 var instance;
 
 class Site {
@@ -14,7 +15,7 @@ class Site {
 
     constructor(port) {
         this.app = express();
-        
+        this.app.use(express.static('public'))
         this.port = port;
         instance = this; 
     }

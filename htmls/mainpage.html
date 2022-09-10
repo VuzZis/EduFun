@@ -4,9 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href = "/mainmenu.css" type="text/css">
+    <link rel="stylesheet" href = "/home.css" type="text/css">
+    <link rel="stylesheet" href = "https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
     <title>Главная</title>
 </head>
 <body>
-    главная страница лол
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class ="logo">
+                <i class='bx bx-book-open'></i>
+                <div class="logo_name">Edufun</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="#">
+                    <i class='bx bx-user-circle' ></i>
+                    <span class="links_name">Личный кабинет</span>
+                </a>
+            </li>
+            <li>
+                <a href="tests/">
+                    <i class='bx bx-check-square' ></i>
+                    <span class="links_name">Тестирование</span>
+                </a>
+            </li>
+            <li>
+                <a href="books/">
+                    <i class='bx bx-book-content' ></i>
+                    <span class="links_name">Электронные книги</span>
+                </a>
+            </li>
+            <li>
+                <a href="users/">
+                    <i class='bx bx-street-view' ></i>
+                    <span class="links_name">Искать участников</span>
+                </a>
+            </li>
+            <li>
+                <a href="dashboard/">
+                    <i class='bx bx-slideshow' ></i>
+                    <span class="links_name">Панель управления</span>
+                </a>
+            </li>
+            <li>
+                <a href="logs/">
+                    <i class='bx bx-message-square-dots' ></i>
+                    <span class="links_name">Логи</span>
+                </a>
+            </li>-
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <div class="name_job">
+                        <div class="name" id="name">
+                            Гость
+                        </div>
+                        <div class="job" id="job">
+                            Гостевой аккаунт
+                        </div>
+                    </div> 
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </div>
+            
+        </div>
+    </div>
+    <div class="home_content">
+        <div class="text">Личный кабинет</div>
+    </div>
 </body>
 </html>
