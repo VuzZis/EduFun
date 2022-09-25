@@ -14,7 +14,7 @@
         <div class="logo_content">
             <div class ="logo">
                 <i class='bx bx-book-open'></i>
-                <div class="logo_name">Edufun</div>
+                <div class="logo_name">Mektab</div>
             </div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
@@ -44,12 +44,18 @@
                 </a>
             </li>
             <li>
+                <a href="login/">
+                    <i class='bx bx-log-in'></i>
+                    <span class="links_name">Авторизация</span>
+                </a>
+            </li>
+            <li class="admin_only hide">
                 <a href="dashboard/">
-                    <i class='bx bx-slideshow' ></i>
+                    <i class='bx bx-slideshow'></i>
                     <span class="links_name">Панель управления</span>
                 </a>
             </li>
-            <li>
+            <li class="admin_only hide">
                 <a href="logs/">
                     <i class='bx bx-message-square-dots' ></i>
                     <span class="links_name">Логи</span>
@@ -68,7 +74,8 @@
                         </div>
                     </div> 
                 </div>
-                <i class='bx bx-log-out' id="log_out"></i>
+                    <i class='bx bx-log-out' id="log_out" onclick=""></i>
+
             </div>
             
         </div>
@@ -76,5 +83,81 @@
     <div class="home_content">
         <div class="text">Личный кабинет</div>
     </div>
+    <script>
+        let logout_btn = document.querySelector('#log_out');
+        logout_btn.onclick = function() {
+            localStorage.setItem('mektablogin',"");
+            localStorage.setItem('mektabpassword',"");
+            document.location.reload();
+        }
+    </script>
+    <script>
+        let btn = document.querySelector('#btn');
+        let sidebar = document.querySelector('.sidebar')
+        
+        let beenActive = localStorage.getItem('mektabsidebaractive');
+        if(beenActive  == "true") sidebar.classList.add("active");
+        else sidebar.classList.remove("active");
+
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+            localStorage.setItem('mektabsidebaractive',sidebar.classList.contains("active"));
+        }
+
+    </script>
+    <script>
+        var localJobs = {
+            'guest' : "Гостевой аккаунт",
+            'student' : "Ученик",
+            'teacher' : "Учитель",
+            'admin' : "Админ",
+            'owner' : "Владелец"
+        }
+        let login = localStorage.getItem('mektablogin');
+        let password = localStorage.getItem('mektabpassword');
+        let userData = {};
+        fetch("/api/get-userdata/"+login)
+            .then(response => response.json())
+            .then(data => {
+                userData = data
+                var job = localJobs.guest;
+                var name = "Гость";
+                var {status,nickname,id} = userData;
+                if(userData.hasOwnProperty('id')) {
+                    fetch("/api/is-valid-password/"+login+"/"+password)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            if(data.answer) {
+                                job = localJobs[status];
+                                name = nickname;
+                            } else {
+                                userData = {
+                                    status : "guest",
+                                    name : "Гость",
+                                    id : "a"
+                                }
+                            }
+                            if(status == "owner" || status == "admin") {
+                                let elements = Array.from(document.getElementsByClassName('admin_only'));
+                                elements.forEach(e => {
+                                    e.classList.remove('hide');
+                                })
+                            } else {
+                                let elements = Array.from(document.getElementsByClassName('admin_only'));
+                                elements.forEach(e => {
+                                    e.remove();
+                                })
+                            }
+                            const nameText = document.getElementById('name');
+                            const jobText = document.getElementById('job');
+                            nameText.innerText = name;
+                            jobText.innerText = job;
+                        });
+                }
+            });
+        
+
+    </script>
 </body>
 </html>

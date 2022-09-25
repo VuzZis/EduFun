@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.login_box {
+    min-width: 100px;
+    max-width: 50%;
+    width: 50%;
+    min-height: 80px;
+    max-height: 50%;
+    height: 50%;
+    background-color: #11101d;
+    border-radius: 30px;
+    margin-left: 25%;
+    margin-top: 8%;
+    padding : 20px;
+    text-align: center;
+    
+}
+.logintext {
+    font-size : 25px;
+    font-weight: 500;
+    color: white;
+}
+.loginfield {
+    background-color: #374153;
+    border :none;
+    border-radius: 10px;
+    color : #b1ced6;
+    width : 70%;
+    margin-bottom: 10px;
+    height : 15%;
+    font-size: 20px;
+    text-align: center;
+    align-content: center;
+    transition:0.5s;
+}
+.loginfield::placeholder {
+    color: white;
+    opacity : 0.4;
+}
+.loginfield:focus {
+    color : #f1f8ff;
+    background-color: #556a74;
+    font-size: 22px;
+    transform: translate(5px,-5px);
+    border-radius: 15px;
+}
+.loginbutton {
+    background-color: #374153;
+    border :none;
+    border-radius: 10px;
+    color : #b1ced6;
+    width : 40%;
+    margin-bottom: 10px;
+    height : 10%;
+    font-size: 20px;
+    text-align: center;
+    align-content: center;
+    transition:0.5s;
+}
+.loginbutton:hover {
+    color : #f1f8ff;
+    background-color: #556a74;
+    font-size: 22px;
+    transform: translate(5px,-5px);
+    border-radius: 15px;
+    cursor:pointer;
+}
+.loginbutton:focus {
+    color : #f1f8ff;
+    background-color: #70858f;
+    font-size: 22px;
+    transform: translate(0px,-5px);
+    border-radius: 15px;
+    cursor:pointer;
+    opacity : 0.5;
+    transition: 1s;
+}

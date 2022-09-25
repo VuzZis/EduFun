@@ -7,7 +7,7 @@
     <link rel="stylesheet" href = "/mainmenu.css" type="text/css">
     <link rel="stylesheet" href = "/home.css" type="text/css">
     <link rel="stylesheet" href = "https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
-    <title>Ошибка</title>
+    <title>Логи</title>
 </head>
 <body>
     <div class="sidebar">
@@ -81,10 +81,10 @@
         </div>
     </div>
     <div class="home_content">
-        <div class="text">Ошибка</div>
-        404: Страница не найдена<br><br>
-        Похоже эта страница была удалена или её не существует<br>
-        Попробуйте проверить правильность ссылки либо вернуться на главную страницу.
+        <div class="text">Логи</div>
+        <div id="logs">
+
+        </div>
     </div>
     <script>
         let logout_btn = document.querySelector('#log_out');
@@ -99,13 +99,20 @@
         let sidebar = document.querySelector('.sidebar')
         
         let beenActive = localStorage.getItem('mektabsidebaractive');
-        if(beenActive  == "true") sidebar.classList.add("active");
+        if(beenActive == "true") sidebar.classList.add("active");
         else sidebar.classList.remove("active");
 
         btn.onclick = function() {
             sidebar.classList.toggle("active");
             localStorage.setItem('mektabsidebaractive',sidebar.classList.contains("active"));
         }
+
+        let logs = document.querySelector('#logs');
+        fetch("../api/getlogs/")
+            .then(response => response.json())
+            .then(data => {
+                logs.innerText = data.logs;
+            });
 
     </script>
     <script>
@@ -119,7 +126,7 @@
         let login = localStorage.getItem('mektablogin');
         let password = localStorage.getItem('mektabpassword');
         let userData = {};
-        fetch("/api/get-userdata/"+login)
+        fetch("../api/get-userdata/"+login)
             .then(response => response.json())
             .then(data => {
                 userData = data
@@ -127,7 +134,7 @@
                 var name = "Гость";
                 var {status,nickname,id} = userData;
                 if(userData.hasOwnProperty('id')) {
-                    fetch("/api/is-valid-password/"+login+"/"+password)
+                    fetch("../api/is-valid-password/"+login+"/"+password)
                         .then(response => response.json())
                         .then(data => {
                             console.log(data);
@@ -158,8 +165,6 @@
                         });
                 }
             });
-        
-
     </script>
 </body>
 </html>
